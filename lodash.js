@@ -5,24 +5,23 @@ var _ = {};
  **************************************/
 
  // Returns the first element of an array.
-_.first = function(array) {
-  return array[0];
-};
+ _.first = function(array) {
+   return array[0];
+ };
 
  // Returns the first n number of elements in an array.
-_.take = function(array, n) {
-  if ( !n ) { return array.slice(0,1) };
-  return array.slice(0,n);
-};
+ _.take = function(array, n=1) {
+   return array.slice(0,n);
+ };
 
 // Returns the last element of an array.
 _.last = function(array) {
-  return array[array.length-1]
+	return array[array.length-1];
 };
 
 // Returns the last n number of elements in an array.
-_.takeRight = function(array, n) {
-	// Place your solution here
+_.takeRight = function(array, n=1) {
+  return array.slice(n * -1);
 };
 
 // Returns a new array with all falsey values removed.
@@ -31,17 +30,13 @@ _.takeRight = function(array, n) {
 // _.compact([0, 1, false, 2, '', 3]);
 // → [1, 2, 3]
 _.compact = function(array) {
-  console.log("array>>>",array)
-	let output = [];
-
-  for ( let i = 0; i < array.length; i++ ) {
-    if ( !array[i] ){
-      output.push(array[i]);
+	let truths = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i]) {
+      truths.push(array[i]);
     }
   }
-
-  console.log("output>>>",output)
-  return output;
+  return truths;
 };
 
 // Returns a new array of elements in the first argument, but
@@ -50,25 +45,32 @@ _.compact = function(array) {
 // _.difference([1, 2, 3], [4, 2]);
 // → [1, 3]
 _.difference = function(arrayOne, arrayTwo) {
-	// Place your solution here
-};
+  let unq = [];
+
+  for (let i = 0; i < arrayOne.length; i++) {
+    if (arrayTwo.indexOf(arrayOne[i]) <= -1){
+      unq.push(arrayOne[i]);
+    }
+  }
+  return unq;
+}
 
 // Returns element with minimum
 // value in an array.
 _.min = function(array) {
-	// Place your solution here
+	return Math.min(...array);
 };
 
 // Returns element with maximum
 // value in an array.
 _.max = function(array) {
-	// Place your solution here
+	return Math.max(...array);
 };
 
 // Returns either index of matched element or
 // -1.
 _.indexOf = function(array, el) {
-	// Place your solution here
+	return array.indexOf(el);
 };
 
 /*************** BONUS ***************/
@@ -82,29 +84,55 @@ _.shuffle = function(array) {
 **************************************/
 // Returns the length of a collection.
 _.size = function(collection) {
-	// Place your solution here
+  if(typeof collection === 'string'|| Array.isArray(collection)) {
+    return collection.length;
+  } else {
+    return Object.keys(collection).length;
+  }
 };
 
 // Iterates on each element of a collection and
 // then returns the original collection.
 _.forEach = function(collection, callback) {
-	// Place your solution here
+  if(typeof collection === 'string'|| Array.isArray(collection)) {
+    for (let i = 0; i < collection.length; i++) {
+      callback(collection[i]);
+    }
+  } else {
+    for(let key in collection) {
+      callback(collection[key]);
+    }
+  }
 };
 
 // Iterates on each element of a collection and
 // then returns a new array.
 _.map = function(collection, callback) {
-	// Place your solution here
+  let mapped = [];
+    _.forEach(collection, function(element){
+      mapped.push(callback(element));
+    })
+  return mapped;
 };
 
 // Returns a new collection with filtered elements.
 _.filter = function(collection, callback) {
-	// Place your solution here
+  let filtered = [];
+    _.forEach(collection, function(element){
+      if (callback(element))
+      filtered.push(element);
+    })
+  return filtered;
 };
 
 // Returns a new collection with unfiltered elements.
 _.reject = function(collection, callback) {
-	// Place your solution here
+  let filtered = [];
+    _.forEach(collection, function(element){
+      if (!callback(element))
+      filtered.push(element);
+    })
+  return filtered;
 };
 
 /*************** BONUS ***************/

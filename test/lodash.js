@@ -11,6 +11,10 @@ describe('#first(array)', function() {
     assert.equal(_.first(['first', 'second']), 'first');
     assert.equal(_.first(['monday', 'tuesday']), 'monday');
   });
+  //personal test1
+  it('NEW TEST should return undefined if an empty array', function(){
+    assert.equal(_.first([]), undefined);
+  });
 
 });
 
@@ -19,7 +23,12 @@ describe('#take(array, n)', function() {
   it('should assign a default value of 1 to n', function() {
     assert.deepEqual(_.take(['first', 'second']), ['first']);
     assert.deepEqual(_.take(['saturday', 'sunday']), ['saturday']);
+
   });
+  // personal test2
+  it('NEW TEST should return an empty array if given empty array', function(){
+    assert.deepEqual(_.take([]), []);
+    });
 
   it('should return n elements from the beginning of an array', function() {
     assert.deepEqual(_.take(['one', 'two'], 1), ['one']);
@@ -35,6 +44,11 @@ describe('#last(array)', function() {
     assert.equal(_.last(['monday', 'tuesday']), 'tuesday');
   });
 
+  //personal test3
+  it('NEW TEST should a reduced length from original array', function(){
+    assert.equal(_.last(['first', 'second', 'third']).length, 5);
+    });
+
 });
 
 describe('#takeRight(array, n)', function() {
@@ -47,6 +61,11 @@ describe('#takeRight(array, n)', function() {
   it('should return n elements from the end of an array', function() {
     assert.deepEqual(_.takeRight(['one', 'two'], 1), ['two']);
     assert.deepEqual(_.takeRight(['mon', 'wed', 'fri'], 2), ['wed', 'fri']);
+  });
+
+  //personal test4
+  it('NEW TEST should return n elements from the end of an array', function() {
+    assert.deepEqual(_.takeRight([1, 2], 1), [2]);
   });
 
 });
@@ -73,6 +92,16 @@ describe('#compact(array)', function() {
     assert.deepEqual(_.compact([NaN,'one','two']), ['one', 'two'] );
   });
 
+  //personal test5
+  it('NEW TEST should return a new array of filtered falsy values', function() {
+    assert.deepEqual(_.compact(['one','two', null, NaN, '', undefined, 0]), ['one','two'] );
+  });
+
+  //personal test6
+  it('NEW TEST should return a empty array if given array is empty', function() {
+    assert.deepEqual(_.compact([]), [] );
+  });
+
 });
 
 describe('#difference(array1, array2)', function() {
@@ -80,6 +109,16 @@ describe('#difference(array1, array2)', function() {
   it('should return a new array with elements in the first but not second argument', function() {
     assert.deepEqual(_.difference([1, 2, 3], [4, 2]), [1,3]);
   });
+
+//personal test 7
+  it('NEW TEST should return an empty array if the first and second argument is empty', function() {
+    assert.deepEqual(_.difference([1, 2, 3], [1, 2, 3]), []);
+  });
+
+  //personal test 8
+    it('NEW TEST should return first array if the second argument is empty', function() {
+      assert.deepEqual(_.difference([1, 2, 3], []), [1, 2, 3]);
+    });
 
 });
 
@@ -90,14 +129,34 @@ describe('#min(array)', function() {
     assert.equal(_.min([100,200,300,400]), 100);
   });
 
+  //personal test9
+  it('NEW TEST should return element with the minimum value even with a number string', function() {
+    assert.equal(_.min([1,'3',4,5]), 1);
+  });
+
+  //personal test10
+  it('NEW TEST should return Infinity if given an empty array', function() {
+    assert.equal(_.min([]), Infinity);
+  });
+
 });
 
 describe('#max(array)', function() {
 
-  it('should return the element with the maximum value', function() {
+  it('NEW TEST should return the element with the maximum value', function() {
     assert.equal(_.max([1,2,3,4,5]), 5);
     assert.equal(_.max([1,7,3,4,5,0]), 7);
   });
+
+  //personal test11
+  it('NEW TEST should return -Infinity if given an empty array', function() {
+    assert.equal(_.max([]), -Infinity);
+  });
+
+  //personal test15
+  it('NEW TEST should return NaN if passed a string', function() {
+    assert.equal(isNaN(_.max("bird")), true);
+  })
 
 });
 
@@ -106,6 +165,11 @@ describe('#indexOf(array, el)', function() {
   it('should return an index of the first element in the array that matches el', function() {
     assert.equal(_.indexOf(["one", "two", "three"], "two"), 1);
     assert.equal(_.indexOf([101, 202, 303], 303), 2);
+  });
+
+//personal test12
+  it('NEW TEST should return an index of the third element in the array that matches el', function() {
+    assert.equal(_.indexOf(["one", "two", "three"], "three"), 2);
   });
 
   it('should return an index of -1 if no elements in the array matches el', function() {
@@ -133,6 +197,10 @@ describe('#size(collection)', function() {
     assert.equal(_.size('pizza'), 5);
     assert.equal(_.size('cookie'), 6);
   });
+  // personal test13
+  it('NEW TEST should return length zero for empty string OBVIOUS', function(){
+    assert.equal(_.size(''),0);
+  });
 
   it('should return the size of an array', function() {
     assert.equal(_.size([1, 2, 3, 4]), 4);
@@ -142,6 +210,11 @@ describe('#size(collection)', function() {
   it('should return the size of an object', function() {
     assert.equal(_.size({a: 1, b: 2, c: 100}), 3);
     assert.equal(_.size({a: 'one', b: 'two', c: 'three'}), 3);
+  });
+
+  //personal test14
+  it('NEW TEST should return n > 0 if array has an element inside it', function() {
+    assert.equal(_.size([1]), 1);
   });
 
 });
